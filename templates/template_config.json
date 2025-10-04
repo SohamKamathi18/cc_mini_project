@@ -1,0 +1,104 @@
+{
+  "templates": [
+    {
+      "id": "modern_glass",
+      "name": "Modern Glassmorphism",
+      "file": "template_modern_glass.html",
+      "description": "Contemporary design with glassmorphic elements, backdrop filters, and smooth animations. Perfect for tech startups and modern businesses.",
+      "features": [
+        "Glassmorphism design",
+        "Backdrop blur effects",
+        "Gradient backgrounds",
+        "Wave animations",
+        "Floating elements",
+        "AOS scroll animations"
+      ],
+      "best_for": ["Tech Startups", "SaaS", "Digital Agencies", "Modern Services"],
+      "preview_colors": {
+        "primary": "#667eea",
+        "secondary": "#764ba2",
+        "accent": "#f093fb"
+      }
+    },
+    {
+      "id": "minimal_elegant",
+      "name": "Minimal Elegant",
+      "file": "template_minimal_elegant.html",
+      "description": "Clean and sophisticated design with ample whitespace, subtle animations, and elegant typography. Ideal for luxury brands and professional services.",
+      "features": [
+        "Minimalist layout",
+        "Elegant serif typography",
+        "Subtle hover effects",
+        "Clean lines",
+        "Professional aesthetic",
+        "Smooth transitions"
+      ],
+      "best_for": ["Luxury Brands", "Professional Services", "Consultancies", "Premium Products"],
+      "preview_colors": {
+        "primary": "#1a1a1a",
+        "secondary": "#666666",
+        "accent": "#333333"
+      }
+    },
+    {
+      "id": "corporate_professional",
+      "name": "Corporate Professional",
+      "file": "template_corporate_professional.html",
+      "description": "Traditional business aesthetic with structured layouts, professional color schemes, and trustworthy design elements. Best for established businesses.",
+      "features": [
+        "Professional layout",
+        "Grid-based structure",
+        "Gradient hero sections",
+        "Structured content",
+        "Business-friendly colors",
+        "Clear hierarchy"
+      ],
+      "best_for": ["Corporations", "B2B Services", "Financial Services", "Legal Firms"],
+      "preview_colors": {
+        "primary": "#1e3c72",
+        "secondary": "#2a5298",
+        "accent": "#ffffff"
+      }
+    },
+    {
+      "id": "creative_bold",
+      "name": "Creative & Bold",
+      "file": "template_creative_bold.html",
+      "description": "Vibrant and energetic design with bold colors, asymmetric layouts, and creative animations. Perfect for creative agencies and innovative brands.",
+      "features": [
+        "Vibrant color schemes",
+        "Asymmetric layouts",
+        "Bold typography",
+        "Creative animations",
+        "Playful interactions",
+        "Eye-catching design"
+      ],
+      "best_for": ["Creative Agencies", "Design Studios", "Marketing Firms", "Innovation Labs"],
+      "preview_colors": {
+        "primary": "#ff6b6b",
+        "secondary": "#ff8e53",
+        "accent": "#ffd93d"
+      }
+    },
+    {
+      "id": "dark_neon",
+      "name": "Dark Neon",
+      "file": "template_dark_neon.html",
+      "description": "Futuristic dark theme with neon accents, glowing effects, and premium feel. Ideal for tech-focused and gaming businesses.",
+      "features": [
+        "Dark theme",
+        "Neon glow effects",
+        "Futuristic design",
+        "Animated grid background",
+        "Premium aesthetic",
+        "Cyberpunk vibes"
+      ],
+      "best_for": ["Gaming", "Tech Companies", "Crypto/Blockchain", "Entertainment"],
+      "preview_colors": {
+        "primary": "#00ffff",
+        "secondary": "#ff00ff",
+        "accent": "#ffffff"
+      }
+    }
+  ]
+}

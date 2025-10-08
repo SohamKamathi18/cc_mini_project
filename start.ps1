@@ -1,19 +1,13 @@
 # AI Website Generator - Windows PowerShell Startup Script
-# This script starts both the Flask backend and React frontend
 
-Write-Host ""
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host "  AI Website Generator - Starting Application" -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host ""
 
 # Check if .env file exists
 if (-not (Test-Path ".env")) {
     Write-Host "ERROR: .env file not found!" -ForegroundColor Red
-    Write-Host "Please create a .env file with your API keys." -ForegroundColor Yellow
-    Write-Host ""
-    Write-Host "Run: python quickstart.py" -ForegroundColor Green
-    Write-Host ""
+    Write-Host "Please copy .env.example to .env and add your API keys." -ForegroundColor Yellow
     exit 1
 }
 

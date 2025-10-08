@@ -8,9 +8,20 @@ __pycache__/
 
 # Virtual environment
 myenv/
+venv/
 
 # IDE files
 .vscode/
+.idea/
+
+# Generated websites (exclude from git)
+*-website.html
+*.html
+!templates/*.html
+!frontend/index.html
+
+# Test files
+test_*.py
 
 # Temporary files
 *.tmp
@@ -19,3 +30,6 @@ myenv/
 # Windows system files
 Thumbs.db
 desktop.ini
+
+# Cleanup docs (optional - can be committed)
+# CLEANUP_*.md

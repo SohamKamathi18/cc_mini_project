@@ -1,838 +1,402 @@
-# 🚀 AI Business Website Generator# 🚀 AI Business Website Generator
+# 🚀 AI Business Website Generator
 
+[![React](https://img.shields.io/badge/React-18.2-blue.svg)](https://reactjs.org/)
+[![Python](https://img.shields.io/badge/Python-3.8+-green.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+An intelligent full-stack application that automatically generates professional, responsive business websites using AI. Powered by Google Gemini AI, LangGraph multi-agent system, and a beautiful React frontend.
 
-An intelligent multi-agent system powered by Google Gemini AI and LangGraph that automatically builds professional, responsive websites for small businesses. Generate beautiful, production-ready websites in minutes with AI-driven content, design, and automatic image integration.An intelligent multi-agent system powered by Google Gemini AI and LangGraph that automatically builds professional, responsive websites for small businesses. Generate beautiful, production-ready websites in minutes with AI-driven content, design, and automatic image integration.
-
-
-
-------
-
-
-
-## ✨ Key Features## ✨ Key Features
-
-
-
-### 🤖 Multi-Agent AI System### 🤖 Multi-Agent AI System
-
-- **BusinessAnalysisAgent**: Analyzes your business and extracts key insights- **BusinessAnalysisAgent**: Analyzes your business and extracts key insights
-
-- **DesignAgent**: Creates custom color schemes, typography, and visual elements- **DesignAgent**: Creates custom color schemes, typography, and visual elements
-
-- **ContentAgent**: Writes compelling copy and website content- **ContentAgent**: Writes compelling copy and website content
-
-- **ImageAgent**: Fetches relevant images from Unsplash API- **ImageAgent**: Fetches relevant images from Unsplash API
-
-- **HTMLAgent**: Builds the final responsive website- **HTMLAgent**: Builds the final responsive website
-
-
-
-### 🎨 5 Professional Templates### 🎨 5 Professional Templates
-
-1. **Modern Glass** - Glassmorphism with smooth animations and frosted effects1. **Modern Glass** - Glassmorphism with smooth animations and frosted effects
-
-2. **Minimal Elegant** - Clean, sophisticated design with subtle styling2. **Minimal Elegant** - Clean, sophisticated design with subtle styling
-
-3. **Corporate Professional** - Traditional business aesthetic with trust-building elements3. **Corporate Professional** - Traditional business aesthetic with trust-building elements
-
-4. **Creative Bold** - Vibrant, asymmetric layouts with dramatic effects4. **Creative Bold** - Vibrant, asymmetric layouts with dramatic effects
-
-5. **Dark Neon** - Futuristic dark theme with glowing neon accents5. **Dark Neon** - Futuristic dark theme with glowing neon accents
-
-
-
-### 📸 Automatic Image Integration### 📸 Automatic Image Integration
-
-- Fetches high-quality images from Unsplash API- Fetches high-quality images from Unsplash API
-
-- Smart keyword extraction from business descriptions- Smart keyword extraction from business descriptions
-
-- Images for hero, about, services, and CTA sections- Images for hero, about, services, and CTA sections
-
-- Graceful fallback to placeholder images- Graceful fallback to placeholder images
-
-- Content-safe filtering- Content-safe filtering
-
-
-
-### 🎯 Production-Ready Output### 🎯 Production-Ready Output
-
-- ✅ Fully responsive (mobile, tablet, desktop)- ✅ Fully responsive (mobile, tablet, desktop)
-
-- ✅ Modern CSS with animations and effects- ✅ Modern CSS with animations and effects
-
-- ✅ Interactive elements (AOS animations, hover effects)- ✅ Interactive elements (AOS animations, hover effects)
-
-- ✅ SEO-optimized structure- ✅ SEO-optimized structure
-
-- ✅ Single HTML file (no dependencies)- ✅ Single HTML file (no dependencies)
-
-- ✅ Fast loading with lazy image loading- ✅ Fast loading with lazy image loading
-
-- ✅ No horizontal scrolling issues- ✅ No horizontal scrolling issues
-
-- ✅ Perfect image sizing and alignment- ✅ Perfect image sizing and alignment
-
-
-
-------
-
-
-
-## 🚀 Quick Start## 🚀 Quick Start
-
-
-
-### 1. Installation### 1. Installation
-
-
-
-```bash```bash
-
-# Install dependencies# Install dependencies
-
-pip install -r requirements.txtpip install -r requirements.txt
-
-``````
-
-
-
-### 2. API Keys Setup### 2. API Keys Setup
-
-
-
-Create a `.env` file:Create a `.env` file:
-
-
-
-```bash```bash
-
-# Required - Get from https://makersuite.google.com/app/apikey# Required - Get from https://makersuite.google.com/app/apikey
-
-GOOGLE_API_KEY=your_google_gemini_api_keyGOOGLE_API_KEY=your_google_gemini_api_key
-
-
-
-# Optional - Get from https://unsplash.com/developers (for high-quality images)# Optional - Get from https://unsplash.com/developers (for high-quality images)
-
-UNSPLASH_ACCESS_KEY=your_unsplash_access_keyUNSPLASH_ACCESS_KEY=your_unsplash_access_key
-
-``````
-
-
-
-**Note**: Without Unsplash key, the system uses beautiful placeholder images.**Note**: Without Unsplash key, the system uses beautiful placeholder images.
-
-
-
-### 3. Generate Your Website### 3. Generate Your Website
-
-
-
-```bash```bash
-
-python S;AY.pypython S;AY.py
-
-``````
-
-
-
-Follow the interactive prompts:Follow the interactive prompts:
-
-1. Choose a template (Modern Glass, Minimal, Corporate, Creative, Dark Neon)1. Choose a template (Modern Glass, Minimal, Corporate, Creative, Dark Neon)
-
-2. Enter your business name2. Enter your business name
-
-3. Describe your business3. Describe your business
-
-4. List your services4. List your services
-
-5. Define your target audience5. Define your target audience
-
-6. Choose color and style preferences6. Choose color and style preferences
-
-7. Add contact info (optional)7. Add contact info (optional)
-
-
-
-### 4. Output### 4. Output
-
-
-
-Your website will be saved as `your-business-name-website.html` - open it in any browser!Your website will be saved as `your-business-name-website.html` - open it in any browser!
-
-
-
-------
-
-
-
-## 📋 System Requirements## 📋 System Requirements
-
-
-
-- **Python**: 3.10 or higher- **Python**: 3.10 or higher
-
-- **Dependencies**: - **Dependencies**: 
-
-  - `google-generativeai` (Gemini AI)  - `google-generativeai` (Gemini AI)
-
-  - `langgraph` (Agent workflow)  - `langgraph` (Agent workflow)
-
-  - `requests` (Image fetching)  - `requests` (Image fetching)
-
-  - `python-dotenv` (Environment variables)  - `python-dotenv` (Environment variables)
-
-
-
----## 📁 Input File Format
-
-
-
-## 🎨 Templates OverviewCreate a JSON file with your business information:
-
-
-
-### Modern Glass```json
-
-```{
-
-✨ Glassmorphism effects with backdrop blur  "business_name": "TechSolutions Pro",
-
-✨ Smooth animations and transitions  "business_description": "Professional IT consulting and software development services for small and medium businesses",
-
-✨ White frosted borders  "services_list": "IT Consulting, Web Development, Cloud Solutions, Cybersecurity, Digital Transformation",
-
-✨ Perfect for: Tech companies, startups, creative agencies  "target_audience": "Small to medium-sized businesses looking to improve their technology infrastructure",
-
-```  "color_theme": "professional",
-
-  "tone_style": "modern"
-
-### Minimal Elegant}
-
-``````
-
-🎯 Clean, sophisticated design
-
-🎯 Subtle shadows and spacing## 🎨 Available Themes & Styles
-
-🎯 Understated elegance
-
-🎯 Perfect for: Professional services, consultancies, portfolios### Color Themes
-
-```- **Modern**: Contemporary blue and gray tones
-
-- **Minimal**: Clean whites and subtle grays  
-
-### Corporate Professional- **Playful**: Bright, energetic colors
-
-```- **Professional**: Corporate blues and navy
-
-💼 Traditional business aesthetic- **Warm**: Reds, oranges, and warm tones
-
-💼 Conservative styling- **Cool**: Blues, teals, and cool tones
-
-💼 Trust-building elements
-
-💼 Perfect for: Law firms, finance, B2B services### Tone/Styles
-
-```- **Modern**: Clean, contemporary design
-
-- **Minimal**: Simple, uncluttered layouts
-
-### Creative Bold- **Playful**: Fun, engaging elements
-
-```- **Professional**: Corporate, trustworthy feel
-
-🎨 Vibrant asymmetric layouts- **Creative**: Unique, artistic approach
-
-🎨 Dramatic hover effects (scale + rotate)- **Corporate**: Traditional business style
-
-🎨 Colorful gradients- **Friendly**: Approachable, welcoming tone
-
-🎨 Perfect for: Creative agencies, artists, events- **Elegant**: Sophisticated, refined design
-
-```
-
-## 📊 Output
-
-### Dark Neon
-
-```The system generates:
-
-⚡ Futuristic dark theme- **Complete HTML file** with embedded CSS and JavaScript
-
-⚡ Glowing neon borders and shadows- **Responsive design** that works on all devices
-
-⚡ Brightness filters on images- **SEO-optimized** structure and metadata
-
-⚡ Perfect for: Gaming, tech, nightlife, modern brands- **Interactive elements** like contact forms and smooth scrolling
-
-```- **Professional styling** based on your chosen theme
-
-
-
----## 🔧 Project Structure
-
-
-
-## 📸 Image Integration```
-
-crewgooglegemini/
-
-### How It Works├── S;AY.PY                         # Main business website generator
-
-├── template_loader.py              # Template management system
-
-1. **Keyword Extraction**: Analyzes business description to extract relevant keywords├── requirements.txt                # Python dependencies
-
-2. **Smart Search**: Queries Unsplash API with contextual search terms├── .env.example                    # Environment variables template
-
-3. **Content-Safe**: Filters inappropriate content automatically├── README.md                       # This file
-
-4. **Proper Sizing**: All images sized to 1200x600px for optimal web display├── IMAGE_INTEGRATION_GUIDE.md      # Unsplash API integration guide
-
-5. **Automatic Placement**: Images added to hero, about, services, and CTA sections├── templates/                      # HTML template files
-
-│   ├── template_modern_glass.html
-
-### Image Sections│   ├── template_minimal_elegant.html
-
-│   ├── template_corporate_professional.html
-
-- **Hero Image**: Eye-catching banner matching your business│   ├── template_creative_bold.html
-
-- **About Image**: Professional team/office photo (max 600px wide)│   ├── template_dark_neon.html
-
-- **Service Images**: Individual images for up to 3 services (200px height each)│   ├── template_config.json        # Template metadata
-
-- **CTA Image**: Engaging background for call-to-action│   ├── README.md                   # Template documentation
-
-│   └── TEMPLATE_GUIDE.md           # Template customization guide
-
-### Without Unsplash API Key├── docs/                           # Documentation
-
-│   ├── ARCHITECTURE.md             # System architecture
-
-The system uses curated placeholder images from Unsplash's CDN - still beautiful and professional!│   ├── IMPLEMENTATION_SUMMARY.md   # Implementation details
-
-│   └── CHECKLIST.md                # Testing checklist
-
-### API Limits (Free Tier)└── examples/                       # Example configurations
-
-    ├── restaurant.json
-
-- **50 requests per hour** (~8 websites/hour)    └── examples.json
-
-- **50,000 requests per month** (~8,300 websites/month)```
-
-- **More than enough for most users**
-
-## 🎯 Supported Business Types
+**Generate stunning websites in minutes - just describe your business!**
 
 ---
 
-The system is optimized for various MSME sectors:
+## ✨ Features
 
-## 🏗️ Architecture- Restaurant & Food Services
+### 🎨 Modern React Frontend
+- **Aesthetic UI**: Glassmorphism design with smooth animations
+- **Real-time Validation**: Instant feedback on form inputs
+- **Progress Animation**: Engaging 4-step generation process
+- **Live Preview**: See generated website instantly in iframe
+- **Template Selection**: Choose from 5 professional design styles
+- **One-Click Download**: Get your HTML file ready to deploy
 
-- Retail & E-commerce  
+### 🤖 AI-Powered Backend
+- **Multi-Agent System**: Specialized AI agents for different tasks
+  - 💼 **BusinessAnalysisAgent**: Analyzes your business requirements
+  - 🎨 **DesignAgent**: Creates custom color schemes and layouts
+  - ✍️ **ContentAgent**: Writes compelling, SEO-friendly copy
+  - 📸 **ImageAgent**: Fetches relevant images from Unsplash
+  - 🏗️ **HTMLAgent**: Builds production-ready responsive HTML
 
-### Workflow- Consulting Services
+### 🎯 5 Professional Templates
+1. **Modern Glass** - Sleek glassmorphism with frosted effects
+2. **Minimal Elegant** - Clean, sophisticated design
+3. **Corporate Professional** - Trust-building business aesthetic
+4. **Creative Bold** - Vibrant, asymmetric layouts
+5. **Dark Neon** - Futuristic dark theme with neon accents
 
-- Healthcare & Wellness
+### 📦 Tech Stack
 
-```- Education & Training
+**Frontend:**
+- React 18.2 with Hooks
+- Vite 5.0 (Lightning-fast build tool)
+- Framer Motion 10.16 (Smooth animations)
+- Axios 1.6 (HTTP client)
+- React Icons
 
-User Input- Fitness & Sports
-
-    ↓- Beauty & Personal Care
-
-Business Analysis (Gemini AI)- Technology Services
-
-    ↓- Real Estate
-
-Design Generation (Gemini AI)- Legal Services
-
-    ↓- Automotive
-
-Content Generation (Gemini AI)- Construction
-
-    ↓- Photography
-
-Image Fetching (Unsplash API)- Event Planning
-
-    ↓- Financial Services
-
-HTML Generation (Template + Variables)
-
-    ↓## 🚀 Advanced Usage
-
-Save Website
-
-```### Custom Configuration
-
-Modify `config.py` to add new themes, business types, or templates.
-
-### LangGraph State Flow
-
-### Extending Agents
-
-```pythonAdd new agents in `agents.py` and corresponding tasks in `tasks.py`.
-
-WebsiteState = {
-
-    "business_info": Dict,      # User inputs### Custom Tools
-
-    "analysis": Dict,           # Business insightsCreate additional tools in `tools.py` for enhanced functionality.
-
-    "design_suggestions": Dict, # Colors, fonts, styles
-
-    "website_content": Dict,    # Headlines, copy, descriptions## 🤝 Contributing
-
-    "images": Dict,             # Image URLs from Unsplash
-
-    "html_code": str,           # Final HTML1. Fork the repository
-
-    "error": Optional[str]      # Error tracking2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-
-}3. Commit changes (`git commit -m 'Add amazing feature'`)
-
-```4. Push to branch (`git push origin feature/amazing-feature`)
-
-5. Open a Pull Request
+**Backend:**
+- Flask 3.0 / FastAPI 0.104.1 (Choose your preference)
+- Google Gemini AI (Content generation)
+- LangGraph 0.0.26 (Agent orchestration)
+- Unsplash API (Image fetching)
+- BeautifulSoup4 (HTML processing)
 
 ---
 
-## 📄 License
+## 🚀 Quick Start
 
-## 🎯 Use Cases
+### Prerequisites
+- **Python 3.8+** ([Download](https://www.python.org/downloads/))
+- **Node.js 16+** ([Download](https://nodejs.org/))
+- **Google Gemini API Key** ([Get Free Key](https://aistudio.google.com/app/apikey))
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-### Small Businesses
-
-- Restaurants & Cafes## 🆘 Support
-
-- Retail Stores
-
-- Salons & SpasHaving issues? Here's how to get help:
-
-- Fitness Studios
-
-- Local Services1. **Check the FAQ** in the wiki
-
-2. **Search existing issues** on GitHub
-
-### Professional Services3. **Create a new issue** with detailed information
-
-- Consultants4. **Join our community** discussions
-
-- Coaches
-
-- Freelancers## 🙏 Acknowledgments
-
-- Agencies
-
-- Legal Services- [CrewAI](https://github.com/joaomdmoura/crewAI) for the multi-agent framework
-
-- [Google Generative AI](https://ai.google.dev/) for the language model
-
-### Tech & Creative- [Serper.dev](https://serper.dev/) for web search capabilities
-
-- Startups- The open-source community for inspiration and tools
-
-- Software Companies
-
-- Design Studios## � Additional Documentation
-
-- Photography
-
-- Event Planning- **[Template Guide](templates/TEMPLATE_GUIDE.md)**: Customize and create your own templates
-
-- **[Image Integration Guide](IMAGE_INTEGRATION_GUIDE.md)**: Set up Unsplash API for automatic images
-
----- **[Architecture](docs/ARCHITECTURE.md)**: System design and workflow
-
-- **[Implementation Summary](docs/IMPLEMENTATION_SUMMARY.md)**: Technical implementation details
-
-## 🔧 Advanced Usage
-
-## �🔮 Roadmap
-
-### Custom Template Selection
-
-- [x] Multi-agent architecture with LangGraph
-
-```python- [x] 5 modern HTML templates with glassmorphism and animations
-
-from template_loader import TemplateLoader- [x] Automatic image integration with Unsplash API
-
-- [ ] Integration with popular CMS platforms
-
-loader = TemplateLoader()- [ ] Advanced e-commerce functionality
-
-templates = loader.list_templates()- [ ] Multi-language support
-
-- [ ] AI-powered SEO optimization
-
-for template in templates:- [ ] Dynamic form integration
-
-    print(f"{template['name']}: {template['description']}")- [ ] Custom domain setup automation
-
-```- [ ] Analytics integration
-
-- [ ] Social media integration
-
-### Testing Image Agent- [ ] Advanced SEO tools
-
-- [ ] Website hosting integration
+### ⚡ Automated Setup (Easiest)
 
 ```bash
-
-python test_image_agent.py---
-
+# Run the quickstart script
+python quickstart.py
 ```
 
-**Made with ❤️ for small businesses worldwide**
-This validates:
-- Keyword extraction
-- Image fetching
-- API connectivity
-- Fallback system
+Follow the interactive prompts to:
+1. Install all dependencies
+2. Configure API keys
+3. Start both servers
+
+### 🔧 Manual Setup
+
+#### Step 1: Install Dependencies
+
+```bash
+# Backend dependencies
+pip install -r requirements.txt
+
+# Frontend dependencies
+cd frontend
+npm install
+cd ..
+```
+
+#### Step 2: Configure Environment
+
+Create or edit `.env` file in the project root:
+
+```env
+GOOGLE_API_KEY=your_actual_gemini_api_key_here
+UNSPLASH_ACCESS_KEY=your_unsplash_key_here  # Optional
+```
+
+Get your Gemini API key: https://aistudio.google.com/app/apikey
+
+#### Step 3: Start Backend (Terminal 1)
+
+**Option A: Flask (Simple)**
+```bash
+python api.py
+```
+
+**Option B: FastAPI (Faster, with auto-docs)**
+```bash
+python api_fastapi.py
+```
+
+Backend will start on: http://localhost:5000
+
+#### Step 4: Start Frontend (Terminal 2)
+
+```bash
+cd frontend
+npm run dev
+```
+
+Frontend will start on: http://localhost:3000
+
+#### Step 5: Open Browser
+
+Navigate to: **http://localhost:3000**
+
+---
+
+## 🎯 How to Use
+
+### 1. Fill Out the Business Form
+
+Provide details about your business:
+- **Business Name**: "Coffee Haven"
+- **Description**: "A cozy coffee shop serving artisan coffee..."
+- **Services**: "Specialty Coffee, Pastries, WiFi, Events"
+- **Target Audience**: "Young professionals and students"
+- **Color Preference**: "Warm browns, cream colors"
+- **Style Preference**: "Cozy, inviting, modern"
+- **Template**: Choose from 5 design options
+
+### 2. Watch the AI Work
+
+See a beautiful 4-step animation while AI:
+1. 🧠 Analyzes your business
+2. 🎨 Creates design suggestions
+3. ✍️ Generates website content
+4. 🏗️ Builds your website
+
+### 3. Preview & Download
+
+- 👀 **Preview**: See your website in live iframe
+- 🔍 **Open in New Tab**: View fullscreen
+- ⬇️ **Download HTML**: Get ready-to-deploy file
+- 🔄 **Create Another**: Start fresh
 
 ---
 
 ## 📁 Project Structure
 
 ```
-crewgooglegemini/
-├── S;AY.py                      # Main application
-├── template_loader.py            # Template management
-├── test_image_agent.py          # Test script for images
-├── requirements.txt              # Python dependencies
-├── .env.example                  # Environment template
-├── README.md                     # This file
+cc_mini_project/
+├── frontend/                 # React application
+│   ├── src/
+│   │   ├── components/      # React components
+│   │   │   ├── Header.jsx
+│   │   │   ├── Hero.jsx
+│   │   │   ├── BusinessForm.jsx
+│   │   │   ├── GeneratingAnimation.jsx
+│   │   │   ├── ResultPreview.jsx
+│   │   │   └── Footer.jsx
+│   │   ├── App.jsx          # Main app component
+│   │   └── index.css        # Global styles
+│   ├── vite.config.js       # Vite configuration
+│   └── package.json         # Frontend dependencies
 │
-├── templates/                    # HTML templates
+├── templates/               # HTML templates
 │   ├── template_modern_glass.html
 │   ├── template_minimal_elegant.html
 │   ├── template_corporate_professional.html
 │   ├── template_creative_bold.html
-│   ├── template_dark_neon.html
-│   └── template_config.json
+│   └── template_dark_neon.html
 │
-└── Generated websites (.html files)
+├── api.py                   # Flask backend
+├── api_fastapi.py          # FastAPI alternative
+├── app.py                  # CLI version (legacy)
+├── tasks.py                # Agent definitions
+├── template_loader.py      # Template system
+├── quickstart.py           # Automated setup
+├── start.ps1               # Windows launcher
+├── requirements.txt        # Backend dependencies
+├── .env                    # Environment variables (create this)
+├── .env.example            # Example environment file
+└── README.md              # This file
 ```
 
 ---
 
-## 🎨 Template Features
+## 🔧 Configuration
 
-### All Templates Include:
+### Backend Options
 
-✅ **Responsive Design**
-- Mobile-first approach
-- Fluid grids and flexible layouts
-- Media queries for all breakpoints
+**Flask (Default):**
+- Simple and straightforward
+- Good for development
+- Run: `python api.py`
 
-✅ **Image Handling**
-- Fixed 200px height for service images
-- Max 600px width for about images
-- `object-fit: cover` prevents distortion
-- Lazy loading for performance
+**FastAPI (Recommended for Production):**
+- Faster with async support
+- Auto-generated docs at `/docs`
+- Run: `python api_fastapi.py`
 
-✅ **Animations**
-- AOS (Animate On Scroll) library
-- Smooth hover effects
-- GPU-accelerated transforms
-- No layout shifts
+Both work identically with the frontend!
 
-✅ **No Horizontal Scrolling**
-- `overflow-x: hidden` on html/body
-- All content viewport-constrained
-- Images never break layout
+### Environment Variables
 
-✅ **Professional Styling**
-- Custom color schemes
-- Google Fonts integration
-- FontAwesome icons
-- Modern CSS properties
+```env
+# Required
+GOOGLE_API_KEY=your_gemini_api_key
+
+# Optional
+UNSPLASH_ACCESS_KEY=your_unsplash_key
+PORT=5000
+FLASK_ENV=development
+```
 
 ---
 
-## 🚨 Troubleshooting
+## 🎨 Available Templates
 
-### Issue: "GOOGLE_API_KEY not found"
-**Solution**: Create `.env` file and add your Google Gemini API key
-
-### Issue: "UNSPLASH_ACCESS_KEY not found"
-**Solution**: This is optional. Add key for real images, or use placeholder images
-
-### Issue: "requests library not found"
-**Solution**: `pip install requests`
-
-### Issue: Images not loading in browser
-**Solution**: 
-- Check internet connection
-- Verify image URLs in HTML source
-- Try opening image URL directly
-
-### Issue: Horizontal scrolling on mobile
-**Solution**: Already fixed in all templates! If still occurring, clear browser cache.
-
-### Issue: Template not loading
-**Solution**: 
-- Verify template file exists in `templates/` folder
-- Check `template_config.json` is present
-- Run `python template_loader.py` to test
+| Template | Best For | Style |
+|----------|----------|-------|
+| **Modern Glass** | Tech, Startups | Glassmorphism, Modern |
+| **Minimal Elegant** | Professional Services | Clean, Simple |
+| **Corporate Professional** | B2B, Consulting | Traditional, Trustworthy |
+| **Creative Bold** | Creative Industries | Vibrant, Unique |
+| **Dark Neon** | Gaming, Tech | Futuristic, Dark |
 
 ---
 
-## 🔒 Security & Privacy
+## 📚 API Endpoints
 
-### API Keys
-- Store in `.env` file (git-ignored)
-- Never commit to version control
-- Server-side only (not in client HTML)
+### Health Check
+```http
+GET /api/health
+```
 
-### Image Content
-- Content-safe filtering enabled
-- Appropriate for business websites
-- Family-friendly images only
+### Get Templates
+```http
+GET /api/templates
+```
 
-### Data Privacy
-- No data sent to external servers except APIs
-- Business info only used for generation
-- Generated HTML is self-contained
+### Generate Website
+```http
+POST /api/generate
+Content-Type: application/json
 
----
+{
+  "business_name": "Coffee Shop",
+  "description": "A cozy coffee shop...",
+  "services": "Coffee, Pastries",
+  "target_audience": "Young professionals",
+  "color_preference": "Warm browns",
+  "style_preference": "Cozy",
+  "template_id": "modern_glass"
+}
+```
 
-## 🎓 How It Works
-
-### 1. Business Analysis
-The system analyzes your inputs to understand:
-- Key strengths and differentiators
-- Customer needs and pain points
-- Unique value proposition
-- Competitive advantages
-- Appropriate tone of voice
-
-### 2. Design Generation
-Creates a custom design system:
-- Primary, secondary, and accent colors
-- Font families (heading and body)
-- Visual elements and styles
-- Gradients and effects
-- Layout recommendations
-
-### 3. Content Creation
-Writes professional copy:
-- Hero headline and subtext
-- About section content
-- Service descriptions
-- Call-to-action text
-- Footer messaging
-
-### 4. Image Selection
-Fetches relevant images:
-- Extracts keywords from description
-- Searches Unsplash for best matches
-- Filters for content safety
-- Optimizes for web display
-- Provides fallbacks if needed
-
-### 5. HTML Generation
-Combines everything:
-- Loads chosen template
-- Injects content and design
-- Adds image URLs
-- Optimizes for performance
-- Saves to single HTML file
+### Download Website
+```http
+GET /api/download/<filename>
+```
 
 ---
 
-## 📊 Performance
+## 🐛 Troubleshooting
 
-### Generation Time
-- Business Analysis: 3-5 seconds
-- Design Generation: 2-4 seconds
-- Content Creation: 3-5 seconds
-- Image Fetching: 2-3 seconds
-- HTML Build: 1-2 seconds
-- **Total: ~12-20 seconds**
+### Frontend Can't Connect to Backend
 
-### Output Size
-- HTML file: 15-25 KB (minified)
-- External resources: Fonts, icons, AOS library (CDN)
-- Images: Loaded from Unsplash CDN
+**Issue**: "ECONNREFUSED" error
 
-### Browser Support
-- ✅ Chrome 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Edge 90+
-- ✅ Mobile browsers
-
----
-
-## 🌟 Best Practices
-
-### Business Description
-- Be specific about your services
-- Mention your unique selling points
-- Include target audience details
-- Use industry-relevant keywords
-
-### Template Selection
-- **Modern Glass**: Tech, startups, modern brands
-- **Minimal Elegant**: Professional services, luxury
-- **Corporate**: Traditional businesses, B2B
-- **Creative Bold**: Agencies, events, creative
-- **Dark Neon**: Gaming, tech, nightlife
-
-### Image Quality
-- Use Unsplash API key for best results
-- Keywords in description help image matching
-- Review generated site and regenerate if needed
-
-### Contact Information
-- Include phone, email, address
-- Use formatted text for readability
-- Add social media links if relevant
-
----
-
-## 🔄 Regeneration
-
-Not happy with the result? Simply run again:
-
+**Solution**:
 ```bash
-python S;AY.py
+# Make sure backend is running on port 5000
+python api.py
+
+# Check vite.config.js has correct proxy:
+# target: 'http://127.0.0.1:5000'
 ```
 
-Each generation is unique because:
-- AI creates fresh content each time
-- Different design variations possible
-- New images selected from Unsplash
-- Templates can be switched
+### Blank Preview After Generation
+
+**Solution**:
+1. Open DevTools (F12)
+2. Check Console for errors
+3. Verify "API Response" log shows `success: true`
+4. Try "Open in New Tab" button
+
+### API Key Errors
+
+**Solution**:
+1. Verify `.env` file exists in project root
+2. Check `GOOGLE_API_KEY` is set correctly
+3. Test key at: https://aistudio.google.com/app/apikey
+4. Restart backend after changing `.env`
+
+### Installation Fails
+
+**Solution**:
+```bash
+# Update pip
+python -m pip install --upgrade pip
+
+# Install with verbose output
+pip install -r requirements.txt --verbose
+
+# For Node.js issues
+cd frontend
+npm cache clean --force
+npm install
+```
+
+For more help, see: `TROUBLESHOOTING.md`
 
 ---
 
-## 📦 Dependencies
+## 🚀 Deployment
 
-### Core Requirements
-```
-google-generativeai>=0.3.0
-langgraph>=0.0.20
-typing-extensions>=4.5.0
-```
+### Frontend (Static Site)
 
-### Optional (Recommended)
-```
-requests>=2.31.0          # For Unsplash images
-python-dotenv>=1.0.0      # For .env file support
+Build the frontend:
+```bash
+cd frontend
+npm run build
 ```
 
-All included in `requirements.txt`
+Deploy the `dist/` folder to:
+- Vercel
+- Netlify
+- GitHub Pages
+- Any static hosting
+
+### Backend (API)
+
+Deploy to:
+- Heroku
+- Railway
+- Render
+- AWS/GCP/Azure
+
+**Environment Variables Required:**
+- `GOOGLE_API_KEY`
+- `UNSPLASH_ACCESS_KEY` (optional)
+
+---
+
+## 📖 Examples
+
+Sample business configurations in `examples.json`:
+- Restaurant
+- Consulting Firm
+- Retail Boutique
+- Healthcare Center
+- Technology Company
 
 ---
 
 ## 🤝 Contributing
 
-This project is for educational and small business use. Feel free to:
-- Fork and customize
-- Add new templates
-- Improve AI prompts
-- Enhance image selection
-- Add new features
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
 ## 📄 License
 
-This project is open-source and free to use for commercial and personal projects.
+This project is licensed under the MIT License.
 
 ---
 
-## 🙏 Credits
+## 🙏 Acknowledgments
 
-### Technologies
-- **Google Gemini AI**: Content and design generation
-- **LangGraph**: Multi-agent workflow orchestration
-- **Unsplash**: High-quality free images
-- **AOS**: Scroll animations
-- **FontAwesome**: Icon library
-
-### Fonts
-- Google Fonts (Inter, Playfair Display, Lato, Crimson Text, etc.)
+- **Google Gemini AI** - Content generation
+- **Unsplash** - High-quality images
+- **LangGraph** - Agent orchestration framework
+- **React** - Frontend framework
+- **Vite** - Build tool
 
 ---
 
 ## 📞 Support
 
-### Getting Help
-1. Check this README first
-2. Review error messages carefully
-3. Test with `test_image_agent.py`
-4. Verify API keys in `.env`
-
-### Common Questions
-
-**Q: Do I need coding knowledge?**
-A: No! Just run the script and answer prompts.
-
-**Q: Can I edit the generated website?**
-A: Yes! It's a standard HTML file. Open in any editor.
-
-**Q: How much does it cost?**
-A: Free! (Except API usage - Google Gemini and Unsplash both have free tiers)
-
-**Q: Can I use this for clients?**
-A: Yes! Generate websites for your clients.
-
-**Q: Do I need Unsplash API key?**
-A: No, but recommended for better images.
-
-**Q: Can I add my own templates?**
-A: Yes! Add HTML files to `templates/` folder and update `template_config.json`
+Having issues? Check out:
+- 📖 `START_HERE.md` - Quick start guide
+- 🔧 `HOW_TO_RUN.md` - Detailed setup instructions
+- 🐛 `TROUBLESHOOTING.md` - Common issues and solutions
+- 🌐 `FLASK_VS_FASTAPI.md` - Backend comparison
 
 ---
 
-## 🎉 Success Stories
+**Built with ❤️ using AI and React**
 
-Generate professional websites for:
-- ✅ Local restaurants and cafes
-- ✅ Professional service providers
-- ✅ Retail stores and boutiques
-- ✅ Fitness studios and gyms
-- ✅ Creative agencies
-- ✅ Tech startups
-- ✅ And many more!
-
----
-
-## 🚀 Get Started Now!
-
-```bash
-# 1. Install
-pip install -r requirements.txt
-
-# 2. Add API key to .env
-echo "GOOGLE_API_KEY=your_key" > .env
-
-# 3. Generate!
-python S;AY.py
-
-# 4. Open your website!
-```
-
-**Generate beautiful, professional websites in minutes!** 🎨✨
-
----
-
-**Last Updated**: December 2024
-**Version**: 2.0 (With Image Integration)
-**Status**: ✅ Production Ready
+Generate your professional website in minutes! 🚀

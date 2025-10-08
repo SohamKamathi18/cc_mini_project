@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import axios from 'axios'
+import { API_CONFIG } from '../config'
 import { 
   FaBriefcase, 
   FaInfoCircle, 
@@ -35,8 +36,8 @@ function BusinessForm({ onSubmit }) {
   const [currentField, setCurrentField] = useState(null)
 
   useEffect(() => {
-    // Fetch available templates
-    axios.get('/api/templates')
+    // Fetch available templates - fallback to default templates if API not available
+    axios.get(`${API_CONFIG.baseURL}/templates`)
       .then(response => {
         if (response.data.success) {
           setTemplates(response.data.templates)
@@ -44,6 +45,14 @@ function BusinessForm({ onSubmit }) {
       })
       .catch(error => {
         console.error('Failed to fetch templates:', error)
+        // Fallback to hardcoded template options
+        setTemplates([
+          { id: 'modern_glass', name: 'Modern Glass', description: 'Sleek glassmorphism design' },
+          { id: 'minimal_elegant', name: 'Minimal Elegant', description: 'Clean and sophisticated' },
+          { id: 'creative_bold', name: 'Creative Bold', description: 'Vibrant and eye-catching' },
+          { id: 'corporate_professional', name: 'Corporate Professional', description: 'Traditional business look' },
+          { id: 'dark_neon', name: 'Dark Neon', description: 'Modern dark theme with neon accents' }
+        ])
       })
   }, [])
 

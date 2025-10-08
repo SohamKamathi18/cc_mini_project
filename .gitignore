@@ -54,3 +54,4 @@ lab_role_arn.txt
 bucket_name.txt
 lambda/layers/python_dependencies/
 *.zip
+output.json 

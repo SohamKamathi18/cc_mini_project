@@ -52,6 +52,7 @@ GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
 UNSPLASH_ACCESS_KEY = os.environ.get('UNSPLASH_ACCESS_KEY', '')
 S3_BUCKET = os.environ.get('S3_BUCKET')
 REGION = os.environ.get('REGION', 'us-east-1')
+CLOUDFRONT_DOMAIN = os.environ.get('CLOUDFRONT_DOMAIN', '')  # CloudFront distribution domain
 
 # Configure Gemini (only if genai was imported successfully)
 if GOOGLE_API_KEY and genai:
@@ -206,8 +207,17 @@ def lambda_handler(event, context):
             CacheControl='no-cache'
         )
         
-        # Generate S3 URL
+        # Generate URLs
         s3_url = f"https://{S3_BUCKET}.s3.{REGION}.amazonaws.com/{s3_key}"
+        
+        # Use CloudFront URL if available, otherwise fall back to S3
+        if CLOUDFRONT_DOMAIN:
+            # CloudFront URL (uses OriginPath /generated-websites)
+            website_url = f"https://{CLOUDFRONT_DOMAIN}/{session_id}/index.html"
+            print(f"✓ CloudFront URL: {website_url}")
+        else:
+            website_url = s3_url
+            print(f"✓ S3 URL (CloudFront not configured): {website_url}")
         
         # Generate pre-signed URL for download (valid for 1 hour)
         download_url = s3_client.generate_presigned_url(
@@ -217,7 +227,6 @@ def lambda_handler(event, context):
         )
         
         print(f"✓ Uploaded to S3: {s3_key}")
-        print(f"✓ S3 URL: {s3_url}")
         
         # Step 7: Prepare response
         response_data = {
@@ -226,8 +235,10 @@ def lambda_handler(event, context):
             'session_id': session_id,
             'filename': f"{session_id}.html",
             'html': html_code,  # Include for preview
-            's3_url': s3_url,
+            'website_url': website_url,  # Primary URL (CloudFront or S3)
+            's3_url': s3_url,  # Direct S3 URL (always included)
             'download_url': download_url,
+            'cloudfront_enabled': bool(CLOUDFRONT_DOMAIN),
             'analysis': analysis,
             'design': design,
             'content': content,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import axios from 'axios'
+import { API_CONFIG } from '../config'
 import { 
   FaCheckCircle, 
   FaBrain, 
@@ -26,7 +27,15 @@ function GeneratingAnimation({ formData, onComplete, onError }) {
   useEffect(() => {
     if (!apiCalled && formData) {
       setApiCalled(true)
-      axios.post('/api/generate', formData)
+      
+      // FormData is already in snake_case format from BusinessForm
+      // Just send it directly to the API
+      axios.post(`${API_CONFIG.baseURL}/generate`, formData, {
+        timeout: API_CONFIG.timeout,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
         .then(response => {
           console.log('API Response:', response.data)
           if (response.data.success) {

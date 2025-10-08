@@ -139,7 +139,9 @@ def generate_website():
             target_audience=data['target_audience'],
             color_preference=data['color_preference'],
             style_preference=data['style_preference'],
-            contact_info=data.get('contact_info', ''),
+            business_address=data.get('business_address', ''),
+            business_email=data.get('business_email', ''),
+            contact_number=data.get('contact_number', ''),
             template_id=data.get('template_id', 'modern_glass')
         )
         

@@ -379,6 +379,64 @@
             padding: 40px 0;
         }}
         
+        /* Contact Section Styles */
+        .contact {{
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+        }}
+        
+        .contact h2 {{
+            text-align: center;
+            margin-bottom: 60px;
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+        }}
+        
+        .contact-info {{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }}
+        
+        .contact-item {{
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }}
+        
+        .contact-item:hover {{
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }}
+        
+        .contact-item i {{
+            font-size: 1.5rem;
+            color: white;
+            min-width: 25px;
+        }}
+        
+        .contact-item span, .contact-item a {{
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }}
+        
+        .contact-item a:hover {{
+            color: var(--accent-color);
+        }}
+        
         @media (max-width: 768px) {{
             .hero h1 {{
                 font-size: 2.5rem;
@@ -391,6 +449,14 @@
             
             .services {{
                 grid-template-columns: 1fr;
+            }}
+            
+            .contact-info {{
+                padding: 0 20px;
+            }}
+            
+            .contact-item {{
+                padding: 15px 20px;
             }}
         }}
     </style>

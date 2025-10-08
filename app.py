@@ -63,7 +63,9 @@ class BusinessInfo:
     target_audience: str
     color_preference: str
     style_preference: str
-    contact_info: str = ""
+    business_address: str = ""
+    business_email: str = ""
+    contact_number: str = ""
     template_id: str = "modern_glass"  # Default template
 
 
@@ -345,17 +347,20 @@ class ImageAgent:
         """
         print("📸 Fetching relevant images from Unsplash...")
         
+        # Get number of services for image generation
+        num_services = len(content.get('service_items', []))
+        
         # If no API key, return placeholder images
         if not self.unsplash_access_key:
             print("⚠️ UNSPLASH_ACCESS_KEY not found. Using placeholder images.")
-            return self._get_placeholder_images(business_info)
+            return self._get_placeholder_images(business_info, num_services)
         
         try:
             import requests
         except ImportError:
             print("⚠️ requests library not found. Using placeholder images.")
             print("Install with: pip install requests")
-            return self._get_placeholder_images(business_info)
+            return self._get_placeholder_images(business_info, num_services)
         
         images = {}
         
@@ -371,11 +376,14 @@ class ImageAgent:
             # Fetch service images based on service items
             service_images = []
             service_items = content.get('service_items', [])
-            for i, service in enumerate(service_items[:3]):  # Limit to 3 service images
+            # Fetch images for ALL services (no limit)
+            for i, service in enumerate(service_items):
                 service_query = service.get('name', 'business service')
                 img_url = self._search_unsplash(service_query, orientation='landscape')
                 service_images.append(img_url)
+                print(f"  📸 Fetched image {i+1}/{len(service_items)}: {service.get('name', 'Service')}")
             images['services'] = service_images
+            print(f"  ✅ Total service images fetched: {len(service_images)}")
             
             # Fetch CTA background image
             cta_query = f"{business_info.business_name} call to action"
@@ -387,7 +395,7 @@ class ImageAgent:
         except Exception as e:
             print(f"⚠️ Error fetching images from Unsplash: {e}")
             print("Using placeholder images instead.")
-            return self._get_placeholder_images(business_info)
+            return self._get_placeholder_images(business_info, num_services)
     
     def _search_unsplash(self, query: str, orientation: str = 'landscape', per_page: int = 1) -> str:
         """
@@ -461,24 +469,38 @@ class ImageAgent:
         
         return query
     
-    def _get_placeholder_images(self, business_info: BusinessInfo) -> Dict:
+    def _get_placeholder_images(self, business_info: BusinessInfo, num_services: int = 10) -> Dict:
         """
         Generate placeholder image URLs using picsum.photos.
         
         Args:
             business_info: Business information
+            num_services: Number of service images to generate
             
         Returns:
             Dictionary with placeholder image URLs
         """
+        # Generate service images - enough for typical needs
+        service_placeholder_urls = [
+            'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',  # Analytics
+            'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop',  # Design
+            'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=600&fit=crop',  # Technology
+            'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop',  # Employee
+            'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&h=600&fit=crop',  # Architecture
+            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=600&fit=crop',  # Business Meeting
+            'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=600&fit=crop',  # Startup
+            'https://images.unsplash.com/photo-1560472355-109703aa3edc?w=800&h=600&fit=crop',  # Buildings
+            'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop',  # Technology 2
+            'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop'   # Marketing
+        ]
+        
+        # Ensure we have enough service images
+        services_images = service_placeholder_urls[:num_services] if num_services <= len(service_placeholder_urls) else service_placeholder_urls
+        
         return {
             'hero': 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=600&fit=crop',  # Office space
             'about': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=600&fit=crop',  # Team
-            'services': [
-                'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',  # Analytics
-                'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop',  # Design
-                'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=600&fit=crop'   # Technology
-            ],
+            'services': services_images,
             'cta': 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=1200&h=600&fit=crop'  # Business
         }
     
@@ -555,13 +577,27 @@ class HTMLAgent(GeminiAgent):
         
         # Generate contact section HTML
         contact_section = ""
-        if business_info.contact_info:
+        # Check if any contact information is provided
+        if business_info.business_address or business_info.business_email or business_info.contact_number:
+            contact_items = []
+            
+            if business_info.business_address:
+                contact_items.append(f'<div class="contact-item"><i class="fas fa-map-marker-alt"></i> <span>{business_info.business_address}</span></div>')
+            
+            if business_info.business_email:
+                contact_items.append(f'<div class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:{business_info.business_email}">{business_info.business_email}</a></div>')
+            
+            if business_info.contact_number:
+                contact_items.append(f'<div class="contact-item"><i class="fas fa-phone"></i> <a href="tel:{business_info.contact_number}">{business_info.contact_number}</a></div>')
+            
             contact_section = f"""
         <section class="contact" id="contact">
             <div class="container">
                 <h2 data-aos="fade-up">Contact Us</h2>
                 <div class="contact-content" data-aos="fade-up" data-aos-delay="200">
-                    <p>{business_info.contact_info}</p>
+                    <div class="contact-info">
+                        {"".join(contact_items)}
+                    </div>
                 </div>
             </div>
         </section>"""
@@ -615,13 +651,27 @@ class HTMLAgent(GeminiAgent):
                 </div>"""
         
         contact_section = ""
-        if business_info.contact_info:
+        # Check if any contact information is provided
+        if business_info.business_address or business_info.business_email or business_info.contact_number:
+            contact_items = []
+            
+            if business_info.business_address:
+                contact_items.append(f'<div class="contact-item"><i class="fas fa-map-marker-alt"></i> <span>{business_info.business_address}</span></div>')
+            
+            if business_info.business_email:
+                contact_items.append(f'<div class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:{business_info.business_email}">{business_info.business_email}</a></div>')
+            
+            if business_info.contact_number:
+                contact_items.append(f'<div class="contact-item"><i class="fas fa-phone"></i> <a href="tel:{business_info.contact_number}">{business_info.contact_number}</a></div>')
+            
             contact_section = f"""
         <section class="contact" id="contact">
             <div class="container">
                 <h2 data-aos="fade-up">Contact Us</h2>
                 <div class="contact-content" data-aos="fade-up" data-aos-delay="200">
-                    <p>{business_info.contact_info}</p>
+                    <div class="contact-info">
+                        {"".join(contact_items)}
+                    </div>
                 </div>
             </div>
         </section>"""

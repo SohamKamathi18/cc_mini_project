@@ -8,6 +8,8 @@ import {
   FaUsers, 
   FaPalette, 
   FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
   FaArrowRight,
   FaSpinner
 } from 'react-icons/fa'
@@ -21,7 +23,9 @@ function BusinessForm({ onSubmit }) {
     target_audience: '',
     color_preference: '',
     style_preference: '',
-    contact_info: '',
+    business_address: '',
+    business_email: '',
+    contact_number: '',
     template_id: 'modern_glass'
   })
 
@@ -170,13 +174,28 @@ function BusinessForm({ onSubmit }) {
       required: true
     },
     {
-      name: 'contact_info',
-      label: 'Contact Information (Optional)',
+      name: 'business_address',
+      label: 'Business Address',
+      icon: FaMapMarkerAlt,
+      type: 'text',
+      placeholder: 'e.g., 123 Business St, City, State 12345',
+      required: false
+    },
+    {
+      name: 'business_email',
+      label: 'Business Email',
+      icon: FaEnvelope,
+      type: 'email',
+      placeholder: 'e.g., hello@yourbusiness.com',
+      required: false
+    },
+    {
+      name: 'contact_number',
+      label: 'Contact Number',
       icon: FaPhone,
-      type: 'textarea',
-      placeholder: 'Phone, email, address...',
-      required: false,
-      rows: 3
+      type: 'tel',
+      placeholder: 'e.g., (555) 123-4567',
+      required: false
     }
   ]
 

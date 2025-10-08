@@ -33,3 +33,24 @@ desktop.ini
 
 # Cleanup docs (optional - can be committed)
 # CLEANUP_*.md
+
+# AWS Lambda files
+lambda_env.json
+lab_role_arn.txt
+bucket_name.txt
+lambda/layers/python_dependencies/
+*.zip
+
+# AWS Lambda files
+lambda_env.json
+lab_role_arn.txt
+bucket_name.txt
+lambda/layers/python_dependencies/
+*.zip
+
+# AWS Lambda files
+lambda_env.json
+lab_role_arn.txt
+bucket_name.txt
+lambda/layers/python_dependencies/
+*.zip

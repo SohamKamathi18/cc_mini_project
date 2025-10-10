@@ -8,6 +8,7 @@ import os
 import json
 import sys
 from pathlib import Path
+from datetime import datetime
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import traceback
@@ -197,19 +198,47 @@ def generate_website():
         
         print(f"✅ Website generated successfully: {filename}")
         
+        # Generate mock URLs for local development (similar to Lambda response)
+        session_id = safe_name + '-' + datetime.now().strftime('%Y%m%d%H%M%S')
+        mock_s3_url = f"http://localhost:5000/api/preview/{filename}"
+        
         return jsonify({
             'success': True,
             'message': 'Website generated successfully!',
+            'session_id': session_id,
             'filename': filename,
             'html': html_code,
+            'website_url': mock_s3_url,  # Mock URL for local dev
+            's3_url': mock_s3_url,  # Same as website_url for local
+            'download_url': f"http://localhost:5000/api/download/{filename}",
+            'cloudfront_enabled': False,
             'analysis': analysis,
             'design': design,
-            'content': content
+            'content': content,
+            'generation_time': datetime.now().isoformat()
         })
         
     except Exception as e:
         print(f"❌ Error generating website: {e}")
         traceback.print_exc()
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+@app.route('/api/preview/<filename>', methods=['GET'])
+def preview_website(filename):
+    """Preview generated website file (like S3 URL)."""
+    try:
+        filepath = Path(filename)
+        if filepath.exists():
+            return send_file(filepath, mimetype='text/html')
+        else:
+            return jsonify({
+                'success': False,
+                'error': 'File not found'
+            }), 404
+    except Exception as e:
         return jsonify({
             'success': False,
             'error': str(e)

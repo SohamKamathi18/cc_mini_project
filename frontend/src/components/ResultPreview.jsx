@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FaDownload, FaEye, FaRedo, FaCheckCircle, FaCode } from 'react-icons/fa'
+import { FaDownload, FaEye, FaRedo, FaCheckCircle, FaCode, FaLink, FaCopy, FaExternalLinkAlt, FaShareAlt } from 'react-icons/fa'
 import './ResultPreview.css'
 
 function ResultPreview({ data, onStartOver }) {
   const [viewMode, setViewMode] = useState('iframe') // 'iframe' or 'code'
   const [iframeKey, setIframeKey] = useState(0)
+  const [copied, setCopied] = useState(false)
   
   console.log('ResultPreview data:', data) // DEBUG
   console.log('HTML length:', data?.html?.length) // DEBUG
   console.log('HTML preview:', data?.html?.substring(0, 200)) // DEBUG - First 200 chars
+  console.log('Website URL:', data?.website_url) // DEBUG
+  console.log('S3 URL:', data?.s3_url) // DEBUG
   
   // Force iframe refresh on mount
   useEffect(() => {
@@ -53,6 +56,22 @@ function ResultPreview({ data, onStartOver }) {
     window.open(url, '_blank')
   }
 
+  const handleCopyLink = () => {
+    const urlToCopy = data.website_url || data.s3_url
+    if (urlToCopy) {
+      navigator.clipboard.writeText(urlToCopy)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
+
+  const handleOpenHostedSite = () => {
+    const hostedUrl = data.website_url || data.s3_url
+    if (hostedUrl) {
+      window.open(hostedUrl, '_blank')
+    }
+  }
+
   return (
     <div className="result-container">
       <motion.div 
@@ -72,6 +91,146 @@ function ResultPreview({ data, onStartOver }) {
           <h2>Your Website is Ready! 🎉</h2>
           <p>We've created a beautiful, professional website tailored to your business</p>
         </motion.div>
+
+        {/* Hosted Link Section */}
+        {(data.website_url || data.s3_url) && (
+          <motion.div 
+            className="hosted-link-section"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              borderRadius: '16px',
+              padding: '2rem',
+              marginBottom: '2rem',
+              color: 'white',
+              boxShadow: '0 10px 40px rgba(102, 126, 234, 0.3)'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+              <FaShareAlt style={{ fontSize: '1.5rem' }} />
+              <h3 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '600' }}>
+                Your Website is Live! 🌐
+              </h3>
+            </div>
+            
+            <p style={{ marginBottom: '1.5rem', opacity: 0.95, fontSize: '0.95rem' }}>
+              Your website is now hosted on AWS S3 and accessible from anywhere in the world!
+            </p>
+
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '12px',
+              padding: '1rem',
+              marginBottom: '1.5rem',
+              border: '1px solid rgba(255, 255, 255, 0.2)'
+            }}>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.5rem',
+                marginBottom: '0.5rem'
+              }}>
+                <FaLink style={{ opacity: 0.8 }} />
+                <span style={{ fontSize: '0.875rem', fontWeight: '500', opacity: 0.9 }}>
+                  Public URL
+                </span>
+              </div>
+              <div style={{
+                background: 'rgba(0, 0, 0, 0.2)',
+                padding: '0.75rem 1rem',
+                borderRadius: '8px',
+                fontFamily: 'monospace',
+                fontSize: '0.9rem',
+                wordBreak: 'break-all',
+                border: '1px solid rgba(255, 255, 255, 0.1)'
+              }}>
+                {data.website_url || data.s3_url}
+              </div>
+            </div>
+
+            <div style={{ 
+              display: 'flex', 
+              gap: '1rem', 
+              flexWrap: 'wrap' 
+            }}>
+              <motion.button
+                onClick={handleOpenHostedSite}
+                style={{
+                  flex: '1',
+                  minWidth: '200px',
+                  padding: '0.875rem 1.5rem',
+                  background: 'white',
+                  color: '#667eea',
+                  border: 'none',
+                  borderRadius: '10px',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+                  transition: 'transform 0.2s, box-shadow 0.2s'
+                }}
+                whileHover={{ scale: 1.02, boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)' }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <FaExternalLinkAlt />
+                <span>Open Live Website</span>
+              </motion.button>
+
+              <motion.button
+                onClick={handleCopyLink}
+                style={{
+                  padding: '0.875rem 1.5rem',
+                  background: copied ? 'rgba(34, 197, 94, 0.2)' : 'rgba(255, 255, 255, 0.15)',
+                  color: 'white',
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  borderRadius: '10px',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  backdropFilter: 'blur(10px)',
+                  transition: 'all 0.2s'
+                }}
+                whileHover={{ scale: 1.02, background: 'rgba(255, 255, 255, 0.2)' }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {copied ? (
+                  <>
+                    <FaCheckCircle />
+                    <span>Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <FaCopy />
+                    <span>Copy Link</span>
+                  </>
+                )}
+              </motion.button>
+            </div>
+
+            <div style={{
+              marginTop: '1.5rem',
+              padding: '1rem',
+              background: 'rgba(255, 255, 255, 0.1)',
+              borderRadius: '8px',
+              fontSize: '0.875rem',
+              lineHeight: '1.6',
+              border: '1px solid rgba(255, 255, 255, 0.15)'
+            }}>
+              <strong>💡 Pro Tip:</strong> Share this link with clients, on social media, or use it as a demo. 
+              The website will remain accessible as long as your AWS session is active!
+            </div>
+          </motion.div>
+        )}
 
         {/* Preview Frame */}
         <motion.div 
@@ -247,10 +406,11 @@ function ResultPreview({ data, onStartOver }) {
         >
           <h4>💡 Next Steps</h4>
           <ul>
-            <li>Download your website and host it on any web server</li>
-            <li>Customize the content and images to match your brand</li>
-            <li>Add your own domain name for a professional touch</li>
-            <li>Share your new website with the world!</li>
+            <li><strong>✅ Your website is already live!</strong> Share the link with anyone</li>
+            <li>Download the HTML and customize it further with your own content</li>
+            <li>Host it on your own domain for a professional touch</li>
+            <li>Use it as a demo or starting point for your business</li>
+            <li>Create variations by generating new websites with different styles</li>
           </ul>
         </motion.div>
       </motion.div>

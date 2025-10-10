@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { FaDownload, FaEye, FaRedo, FaCheckCircle, FaCode, FaLink, FaCopy, FaExternalLinkAlt, FaShareAlt } from 'react-icons/fa'
+import { FaDownload, FaEye, FaRedo, FaCheckCircle, FaCode, FaLink, FaCopy, FaExternalLinkAlt, FaShareAlt, FaQrcode } from 'react-icons/fa'
+import { QRCodeCanvas } from 'qrcode.react'
 import './ResultPreview.css'
 
 function ResultPreview({ data, onStartOver }) {
   const [viewMode, setViewMode] = useState('iframe') // 'iframe' or 'code'
   const [iframeKey, setIframeKey] = useState(0)
   const [copied, setCopied] = useState(false)
+  const [showQR, setShowQR] = useState(false)
+  const qrRef = useRef(null)
   
   console.log('ResultPreview data:', data) // DEBUG
   console.log('HTML length:', data?.html?.length) // DEBUG
@@ -69,6 +72,21 @@ function ResultPreview({ data, onStartOver }) {
     const hostedUrl = data.website_url || data.s3_url
     if (hostedUrl) {
       window.open(hostedUrl, '_blank')
+    }
+  }
+
+  const handleDownloadQR = () => {
+    if (qrRef.current) {
+      const canvas = qrRef.current.querySelector('canvas')
+      if (canvas) {
+        const url = canvas.toDataURL('image/png')
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `${data.filename?.replace('.html', '') || 'website'}-qrcode.png`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }
     }
   }
 
@@ -229,6 +247,106 @@ function ResultPreview({ data, onStartOver }) {
               <strong>💡 Pro Tip:</strong> Share this link with clients, on social media, or use it as a demo. 
               The website will remain accessible as long as your AWS session is active!
             </div>
+
+            {/* QR Code Toggle */}
+            <div style={{ marginTop: '1rem' }}>
+              <motion.button
+                onClick={() => setShowQR(!showQR)}
+                style={{
+                  padding: '0.75rem 1.25rem',
+                  background: 'rgba(255, 255, 255, 0.2)',
+                  color: 'white',
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  borderRadius: '8px',
+                  fontSize: '0.95rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  backdropFilter: 'blur(10px)',
+                  transition: 'all 0.2s'
+                }}
+                whileHover={{ scale: 1.02, background: 'rgba(255, 255, 255, 0.25)' }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <FaQrcode />
+                <span>{showQR ? 'Hide QR Code' : 'Show QR Code'}</span>
+              </motion.button>
+            </div>
+
+            {/* QR Code Display */}
+            {showQR && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  marginTop: '1.5rem',
+                  padding: '1.5rem',
+                  background: 'white',
+                  borderRadius: '12px',
+                  textAlign: 'center'
+                }}
+              >
+                <h4 style={{ 
+                  margin: '0 0 1rem 0', 
+                  color: '#667eea',
+                  fontSize: '1.1rem',
+                  fontWeight: '600'
+                }}>
+                  📱 Scan to Visit Website
+                </h4>
+                
+                <div ref={qrRef} style={{ 
+                  display: 'inline-block',
+                  padding: '1rem',
+                  background: 'white',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+                }}>
+                  <QRCodeCanvas 
+                    value={data.website_url || data.s3_url || 'https://example.com'}
+                    size={200}
+                    level="H"
+                    includeMargin={true}
+                  />
+                </div>
+
+                <p style={{ 
+                  marginTop: '1rem', 
+                  color: '#666',
+                  fontSize: '0.9rem',
+                  marginBottom: '1rem'
+                }}>
+                  Scan this QR code with your phone to open the website instantly!
+                </p>
+
+                <motion.button
+                  onClick={handleDownloadQR}
+                  style={{
+                    padding: '0.75rem 1.5rem',
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '8px',
+                    fontSize: '0.95rem',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    boxShadow: '0 4px 15px rgba(102, 126, 234, 0.3)'
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FaDownload />
+                  <span>Download QR Code</span>
+                </motion.button>
+              </motion.div>
+            )}
           </motion.div>
         )}
 
